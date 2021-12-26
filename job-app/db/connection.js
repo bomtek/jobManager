@@ -2,12 +2,12 @@
 const mongoose  = require('mongoose');
 
 
-const connectionString = "mongodb+srv://tekbam:BalmatlaB!420@jobmanager.efbcm.mongodb.net/Job-Manager?retryWrites=true&w=majority"
 
 
-const connectDB = ()=> {
+
+const connectDB = (URI)=> {
   
-    return mongoose.connect(connectionString)
+    return mongoose.connect(URI);
 
 };
 

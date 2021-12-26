@@ -1,14 +1,16 @@
 const connectDB = require('../db/connection')
 const express = require('express');
 const jobs = require("./router/jobs"); // Importing jobs route 
+require('dotenv').config();
 
 const app = express();
 
 
 
+
 // Connecting to Database and start listening to server after connection 
-connectDB().then(() => {
-    app.listen("3000" , () => {console.log("Listening to Port 3000 ....")})
+connectDB(process.env.MONGO_URI).then(() => {
+    app.listen(3000 , () => {console.log("Listening to Port 3000 ....")})
 }).catch((error) => {console.log(error)})
 
 
