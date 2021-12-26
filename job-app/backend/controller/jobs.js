@@ -1,4 +1,5 @@
-
+const { create } = require("../model/job");
+const Job = require("../model/job")
 const getAllJobs = (req,res) => {
     res.send("Sending from Router Updated")
     };
@@ -8,10 +9,10 @@ const getJob = (req,res) => {
     res.json(req.params.id)
 }
 
-const createJob = (req,res) => {
-    
-    console.log(req.body)
-    res.json(req.body)
+const createJob = async (req,res) => {
+
+    const newJob = await Job.create(req.body)
+    res.status(201).json({newJob})
 }
 
 const updateJob = (req,res) => {
