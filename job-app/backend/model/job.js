@@ -8,7 +8,7 @@ const jobSchema = new Schema(
 
     title:{
         type:String,
-        require:true,
+        require:[true,'title required'],
         trim:true
 
         
