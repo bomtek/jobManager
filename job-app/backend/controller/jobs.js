@@ -61,7 +61,7 @@ const deleteJob = async (req,res) => {
 
     try {
         const {id: jobOrg} = req.params;
-        const data = await Job.findOneAndDelete({organisation:jobOrg});
+        const data = await Job.findOneAndDelete({_id:jobOrg});
 
         if(!data){
             return res.status(404).json({msg: "Data not Found"});
