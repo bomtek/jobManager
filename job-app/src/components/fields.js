@@ -5,38 +5,37 @@ import axios from "axios";
 
 function Fields() {
 
+  // Setting job's initial state
+
+  const [job,setJob] = useState({
+  title: "",
+  organisation: "",
+  website:"",
+  status:"",
+  category:'',
+  dueDate:'',
+  discription: "",
+  experience: 0,
+  skills: [],
+  })
 
 
-  
-    const [title, setTitle] = useState("");
-    const [organisation, setOrganisation] = useState("");
-    const [website, setWebsite] = useState("");
-    const [status, setStatus] = useState("");
-    const [catagory, setCatagory] = useState("");
-    const [dueDate, setDueDate] = useState("");
-     const [job, setJob] = useState({});
-  
-    const addJob = (e) => {
-      e.preventDefault();
-      console.log(e);
-  
-      let job = {
-        title: title,
-       organisation: organisation,
-        website: website,
-        dueDate: dueDate,
-        status:status,
-        catagory:catagory,
-        discription: "",
-        experience: 2,
-        skills: [],
-      };
-  
-      setJob(job)
-  
-      
-  
-      axios
+
+  // Adding event handler to use event bubbling to the form tag 
+
+  const handleEvent = (e)=>{
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setJob({...job,[name]:value}) // setting value by using onchange event 
+
+    
+  }
+
+// Function to add new job data to the mongo db 
+ const addJob=()=> {
+
+   axios
       .post("http://localhost:3001/api/v1/jobs",{job})
       .then((res) => {
          console.log("Data added ")
@@ -44,12 +43,15 @@ function Fields() {
       .catch((error) => {
          console.log(error);
       });
-    };
+    }
+    
+
     return (
         <div>
             <FieldStyle>
       <h1> Add Jobs</h1>
-      <form onSubmit={addJob}>
+      <form onSubmit={addJob}
+       onChange={handleEvent}>
         <label htmlFor="title">
           <h3>Title</h3>
           <input
@@ -57,8 +59,8 @@ function Fields() {
             id="title"
             placeholder="Job Title"
             name="title"
-            onChange={(e) => setTitle(e.target.value)}
-            value={title}
+            // onChange={(e) => setTitle(e.target.value)}
+            value={job.title}
             required
           />
         </label>
@@ -69,9 +71,9 @@ function Fields() {
             type="text"
             id="org"
             placeholder="Organisation Name "
-            name="org"
-            value={organisation}
-            onChange={(e) => setOrganisation(e.target.value)}
+            name="organisation"
+            value={job.organisation}
+            // onChange={(e) => setOrganisation(e.target.value)}
             required
           />
         </label>
@@ -82,9 +84,9 @@ function Fields() {
             type="url"
             id="webpage"
             placeholder="Job Link"
-            name="webpage"
-            value={website}
-            onChange={(e) => setWebsite(e.target.value)}
+            name="website"
+            value={job.website}
+            // onChange={(e) => setWebsite(e.target.value)}
             required
           />
         </label>
@@ -92,16 +94,20 @@ function Fields() {
         <label htmlFor="dueDate">
           <h3>Due Date</h3>
           <input type="date"
+
            id="dueDate"
             placeholder="DD/MM/YYYY"
-            value={dueDate} 
-            onChange={(e) => setDueDate(e.target.value)}
+            name="dueDate"
+            value={job.dueDate} 
+            // onChange={(e) => setDueDate(e.target.value)}
             required />
         </label>
 
         <label htmlFor="status">
           <h3>Status</h3>
-          <select id="status" name="status" value={status} onChange={(e) => setStatus(e.target.value)}>
+          <select id="status" name="status" value={job.status} 
+          // onChange={(e) => setStatus(e.target.value)}
+          >
             <option value="Not Applied" selected>
               NOT APPLIED
             </option>
@@ -114,7 +120,9 @@ function Fields() {
         <label htmlFor="catagory">
           {" "}
           <h3>Catagory</h3>
-          <select id="catagory" name="catagory" value={catagory} onChange={(e) => setCatagory(e.target.value)}>
+          <select id="catagory" name="catagory" value={job.catagory}
+          //  onChange={(e) => setCatagory(e.target.value)}
+           >
             <option value="APS" selected>
               {" "}
               APS{" "}
