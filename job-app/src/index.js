@@ -1,50 +1,27 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import jobs from './test'
-import Card from './components/card'
-import Aside from './components/aside'
-import Nav from './components/nav'
-import Jumbotron from "./components/jumbotron";
-import Search from "./components/search"
-import CardIcon  from "./components/cardIcon";
-
-import './stylesheet/cards.css'
-
-const Dashboard = () => {
-  return(
-
-     <>
-     <Jumbotron />
-     <Nav />
-     <Search/>
-
-     <div className="container">
+import App from "../src/app"
+import Update from "./pages/update";
+import Create from "./pages/create";
+import { BrowserRouter,Routes,Route } from "react-router-dom";
 
 
-      <Aside  jobs={jobs}/>
-    
-      <div className="cards">
-        {
-      jobs.map((job) => {
-        
-        return(
+const Index = () => {
 
-          <Card key={job.id} {...job}>
-          <CardIcon key={job.id} {...job} />
-        </Card>
+return(
 
-        )
-      })
-   
-    }
-       </div>
+  <React.Fragment>
+ <App />
+</React.Fragment>
+)}
 
- 
-       </div>
+ReactDOM.render(
 
-    </>
-  )
-};
-
-
-ReactDOM.render(<Dashboard />, document.getElementById("root"));
+<BrowserRouter>
+<Routes>
+<Route path ="/create" element={<Create />} />
+<Route path="/update" element={<Update />} />
+<Route path="/" element={<Index />} />
+</Routes>
+</BrowserRouter>
+, document.getElementById("root"));

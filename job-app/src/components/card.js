@@ -1,24 +1,40 @@
 import React from "react";
+import { useEffect,useState} from "react";
 import '../stylesheet/card.css'
 import styled from 'styled-components';
 
 
+
 const Card = (props)=>{
 
+
+
    
+
    console.log(props);
-    const {id,title,catagory,company,website,status,dueDate,description,children} = props;
+    const {id,title,catagory,organisation,website,status,dueDate,description,children} = props;
+
+    const [isShowIcon, setShowIcon] = useState(false);
+
+const showIcon = ()=> {
+     setShowIcon(true);
+  };
+
+const hideIcon = ()=> {
+    setShowIcon(false);
+}
     
+   
 
 
 
     return(
-        <CardStyled>
-            <div className="card-header">
+        <CardStyled >
+            <div className="card-header" onMouseOver={()=> showIcon()} onMouseLeave={() => {hideIcon()}} >
             
             <h2>{title}</h2>
-            <h3>{company}</h3>
-            {children}
+            <h3>{organisation}</h3>
+           {isShowIcon && children} 
        
             </div>
             <div className="card-body">

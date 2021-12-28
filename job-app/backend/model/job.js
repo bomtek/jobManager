@@ -25,7 +25,7 @@ const jobSchema = new Schema(
     },
     dueDate:{
         type: Date,
-        require: true
+        require: false
     },
     status:{
         type: String,

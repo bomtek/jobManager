@@ -1,28 +1,40 @@
 import React,{useState} from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+//  import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from 'styled-components';
+import {Button} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
-const jobId = (cat) =>{
-    console.log(cat)
-}
+const axios = require('axios');
+
+
+
+
+ 
 
 
 export default function CardIcon(props) {
 
- const{display,setDisplay} = useState(".icon-hidden")
+ 
 
- const setDisClass =()=>{
-     setDisplay(".icon-show")
- }
+ const deleteItem = (id) => {
+
+axios.delete(`http://localhost:3001/api/v1/jobs/${id}`)
+  .then(() => {window.location.reload()}) 
+  .catch((error) => { console.log(error)})
+}
 
 
     
-    console.log(props)
     return (
-        <IconStyle className={display} onMouseOver={setDisClass}>
+        <IconStyle >
             {/*  Adding event handler  */}
-          <button type='text'>Edit</button>
-          <button type='button' onClick={()=> console.log(props.id)}>Delete</button>
+
+            <Link  to ="/update">Update</Link>
+        
+
+          
+          <button type='button' onClick={()=> deleteItem(props._id)}>Delete</button>
           <button type='reset'>Reset</button>
          
         </IconStyle>

@@ -40,8 +40,11 @@ const getJob = async (req,res) => {
 
 const createJob = async (req,res) => {
 
+
+    
     try {
-        const newJob = await Job.create(req.body)
+        const newJob = await Job.create(req.body.job)
+       
         res.status(201).json({newJob})
         
     } catch (error) {
@@ -53,14 +56,35 @@ const createJob = async (req,res) => {
    
 }
 
-const updateJob = (req,res) => {
-    res.send('Update Job')
+const updateJob = async (req,res) => {
+
+   
+    
+    try {
+        
+        const {id: jobId} = req.params;
+       
+
+        const data = await Job.findOneAndUpdate({_id:jobId}, req.body,{new:true , runValidators:true});
+
+        if(!data) {
+            return res.status(404).json({msg:`No job found`});
+        }
+        console.log(data);
+        res.status(200).json({data});
+
+    } catch (error) {
+
+        res.status(500).json({msg:error})
+        
+    }
 }
 
 const deleteJob = async (req,res) => {
 
     try {
         const {id: jobOrg} = req.params;
+        
         const data = await Job.findOneAndDelete({_id:jobOrg});
 
         if(!data){
