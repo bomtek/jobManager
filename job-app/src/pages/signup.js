@@ -1,9 +1,40 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styled  from 'styled-components';
+import axios from 'axios';
 
 function Signup() {
+
+    const [user,setUser] = useState({email:"",password:""});
+
+    
+
+const eventHandler = async(e)=>{
+   
+
+    const name = e.target.name;
+    const value = e.target.value;
+    
+   setUser({...user,[name]:value});
+}
+
+const addUser= () => {
+
+    console.log(user);
+    axios
+      .post("http://localhost:3001/api/v1/user/signup",  user )
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
+
+
     return (
-        <SignupStyled>
+        <SignupStyled onChange={(e) => {eventHandler(e)}} onSubmit={addUser}>
             <label htmlFor="email">Email
 
             <input type="email" name='email' id="email" />
@@ -15,16 +46,16 @@ function Signup() {
             <input type="password" name='password' id='password' />
             </label>
             
-            <button className="subit">Sign Up</button>
+            <button className="submit">Sign Up</button>
         </SignupStyled>
     )
 }
 
-export default Signup
 
 
 
-const SignupStyled = styled.div`
+
+const SignupStyled = styled.form`
 
 display: flex;
 flex-direction: column;
@@ -60,3 +91,5 @@ button{
 
 
 `
+
+export default Signup;

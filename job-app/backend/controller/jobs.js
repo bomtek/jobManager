@@ -1,5 +1,6 @@
 const { create } = require("../model/job");
 const Job = require("../model/job")
+const User = require("../model/user");
 
 
 const getAllJobs = async (req,res) => {
@@ -97,10 +98,30 @@ const deleteJob = async (req,res) => {
     }
 }
 
+const createUser = async (req,res) => {
+    console.log(req.body)
+
+    try {
+
+        const data = await User.create(req.body);
+        console.log(`data has beeen created`)
+        res.status(201).json({data});
+        
+    } catch (error) {
+
+        res.status(500).json({msg:error});
+        
+    }
+
+
+
+}
+
 module.exports= {
     getAllJobs,
     getJob,
     createJob,
     updateJob,
-    deleteJob
+    deleteJob,
+    createUser
 }

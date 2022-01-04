@@ -1,6 +1,7 @@
 const connectDB = require('../db/connection')
 const express = require('express');
 const jobs = require("./router/jobs"); // Importing jobs route 
+
  const cors = require('cors');
 require('dotenv').config();
 
@@ -25,7 +26,10 @@ app.use(express.json());
 app.use(cors());
 
 // Creating default app route
+
 app.use('/api/v1/jobs',jobs);
+app.use('/api/v1/user',jobs)
+
 
 
 
