@@ -1,12 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-
+import { useGlobleContext} from "../context"
 import axios from "axios";
 
-function Fields() {
+function TestComponent() {
 
-
+    const {state,createJob,storeJob} = useGlobleContext();
+    const job= {...state};
+    
+    
+    
 
   
 
@@ -17,45 +21,46 @@ function Fields() {
 
   // Setting job's initial state
 
-  const [job, setJob] = useState({
-    title: "",
-    organisation: "",
-    website: "",
-    status: "",
-    category: "",
-    dueDate: "",
-    discription: "",
-    experience: 0,
-    skills: [],
-  });
+//   const [job, setJob] = useState({
+//     title: "",
+//     organisation: "",
+//     website: "",
+//     status: "",
+//     category: "",
+//     dueDate: "",
+//     discription: "",
+//     experience: 0,
+//     skills: [],
+//   });
 
   // Adding event handler to use event bubbling to the form tag
 
-  const handleEvent = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
+//   const handleEvent = (e) => {
+//     const name = e.target.name;
+//     const value = e.target.value;
 
-    setJob({ ...job, [name]: value }); // setting value by using onchange event
-  };
+//     setJob({ ...job, [name]: value }); // setting value by using onchange event
+//   };
 
-  // Function to add new job data to the mongo db by handling submit event on the form
-  const addJob = () => {
-    axios
-      .post("http://localhost:3001/api/v1/jobs", { job })
-      .then(() => {
-        console.log("Data added ");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+//   // Function to add new job data to the mongo db by handling submit event on the form
+//   const addJob = () => {
+//     axios
+//       .post("http://localhost:3001/api/v1/jobs", { job })
+//       .then(() => {
+//         console.log("Data added ");
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//   };
 
   return (
     <div>
       <FieldStyle>
         <h1> Add Jobs</h1>
-        <form onSubmit={addJob}
-         onChange={ handleEvent}
+        <form 
+         onSubmit={(e) => storeJob(e)}
+         onChange={(e) => createJob(e)}
          >
           <label htmlFor="title">
             <h3>Title</h3>
@@ -194,4 +199,4 @@ const FieldStyle = styled.div`
   }
 `;
 
-export default Fields;
+export default TestComponent;

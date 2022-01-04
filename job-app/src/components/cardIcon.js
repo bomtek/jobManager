@@ -25,12 +25,21 @@ axios.delete(`http://localhost:3001/api/v1/jobs/${id}`)
 }
 
 
+const updateItem = (id,e) => {
+  e.preventDefault();
+
+  axios.findOneAndUpdate(`http://localhost:3001/api/v1/jobs/${id}`)
+  .then((data) => {console.log(data)})
+  .catch((error) => {console.log(error)})
+}
+
+
     
     return (
         <IconStyle >
             {/*  Adding event handler  */}
 
-            <Link  to ="/update">Update</Link>
+        <Link  to ="/update" onClick={(e) =>  updateItem(props._id,e)}>Update</Link>
         
 
           

@@ -1,6 +1,5 @@
 import React from "react";
 import { useState,useEffect } from "react";
-
 import jobs from "./test";
 import Card from "./components/card";
 import Aside from "./components/aside";
@@ -8,7 +7,9 @@ import Nav from "./components/nav";
 import Jumbotron from "./components/jumbotron";
 import Search from "./components/search";
 import CardIcon from "./components/cardIcon";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 //Importing component for page 
 
 import "./stylesheet/cards.css";
@@ -18,7 +19,11 @@ const axios = require('axios')
 
 const App = () => {
   const [datas, setDatas] = useState([]);
- 
+
+
+  
+  
+  
    useEffect(() => {
     axios
       .get("http://localhost:3001/api/v1/jobs")
@@ -39,6 +44,7 @@ const App = () => {
       <Jumbotron />
       <Nav />
       <Search />
+    
 
       
 
@@ -55,6 +61,7 @@ const App = () => {
           })}
         </div>
       </div>
+   
     </>
   );
 };

@@ -1,10 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link } from "react-router-dom";
+import { useGlobleContext } from "../context";
+
 
 export default function nav() {
+    
     return (
         <Navstyle>
+            
             <Link to ="/create">Create</Link>
            
             
